@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
 
         ReadMovement();
         controllable.ApplyVerticalMoving();
+        ReadRotation();
     }
 
     private void ReadMovement()
@@ -63,12 +64,12 @@ public class PlayerController : MonoBehaviour
         Vector2 inputDirection = gameinput.Gameplay.Movement.ReadValue<Vector2>();
         controllable.Move(inputDirection);
     }
-    private void LateUpdate()
-    {
-        if (!photonView.IsMine) return;
+    //private void LateUpdate()
+    //{
+    //    if (!photonView.IsMine) return;
 
-        ReadRotation();
-    }
+    //    ReadRotation();
+    //}
     private void ReadRotation()
     {
         Vector2 inputRotationDirection = gameinput.Gameplay.Rotation.ReadValue<Vector2>();
