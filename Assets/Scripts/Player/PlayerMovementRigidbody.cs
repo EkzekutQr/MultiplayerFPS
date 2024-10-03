@@ -9,7 +9,7 @@ public class PlayerMovementRigidbody : MonoBehaviour, IControllable
     [SerializeField] private float jumpForce = 50f;
     [SerializeField] private float acceleration = 0.1f;
 
-    private bool isGrounded;
+    [SerializeField] private bool isGrounded;
     private Rigidbody rb;
 
     private void Awake()
@@ -19,12 +19,12 @@ public class PlayerMovementRigidbody : MonoBehaviour, IControllable
 
     public void ApplyVerticalMoving()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public void Jump()
     {
-        throw new System.NotImplementedException();
+        JumpLogic();
     }
 
     public void Move(Vector2 inputDirection)
@@ -83,10 +83,37 @@ public class PlayerMovementRigidbody : MonoBehaviour, IControllable
 
         Vector3 moveDirection = new Vector3(moveHorizontal, 0, moveVertical);
 
-        rb.AddForce(moveDirection.normalized * speed, ForceMode.Force);
+        //rb.AddForce(moveDirection.normalized * speed, ForceMode.Force);
+        rb.AddForce(((transform.forward * moveDirection.z) + (transform.right * moveDirection.x)).normalized * speed, ForceMode.Force);
 
         rb.velocity = rb.velocity - new Vector3(rb.velocity.x * acceleration, 0, rb.velocity.z * acceleration);
 
         //transform.LookAt(transform.position + new Vector3(rb.velocity.x, 0, rb.velocity.z));
+    }
+
+    private void JumpLogic()
+    {
+        if (isGrounded)
+            rb.AddForce(Vector3.up * jumpForce);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        IsGroundedUpate(collision, true);
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        IsGroundedUpate(collision, false);
+    }
+
+    private void IsGroundedUpate(Collision collision, bool value)
+    {
+        if (collision.gameObject.layer.ToString() == ("0"))
+        {
+            isGrounded = value;
+        }
+        Debug.Log(collision.gameObject.layer.ToString());
+        Debug.Log(collision.gameObject.name);
     }
 }
