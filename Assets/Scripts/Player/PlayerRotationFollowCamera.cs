@@ -8,11 +8,11 @@ public class PlayerRotationFollowCamera : MonoBehaviour, ICameraControllable
 {
     private Transform cam;
 
-    private void OnEnable()
+    private void Start()
     {
         if (!gameObject.GetPhotonView().IsMine) return;
 
-        cam = transform.GetComponentInParent<CameraLauncher>().Cam.transform;
+        cam = transform.GetComponent<CameraLauncher>().Cam.transform;
     }
 
     public void Rotate(Vector2 direction)

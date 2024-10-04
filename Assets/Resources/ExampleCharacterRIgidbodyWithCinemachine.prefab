@@ -216,8 +216,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 100
   jumpForce: 275
+  minimumJumpFloorRange: 0.1
+  jumpLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   acceleration: 0.3
-  isGrounded: 0
+  isGrounded: 1
 --- !u!114 &6458210117146582204
 MonoBehaviour:
   m_ObjectHideFlags: 0

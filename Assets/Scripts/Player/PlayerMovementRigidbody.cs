@@ -7,15 +7,20 @@ public class PlayerMovementRigidbody : MonoBehaviour, IControllable
 {
     [SerializeField] private float speed = 100f;
     [SerializeField] private float jumpForce = 50f;
+    [SerializeField] private float minimumJumpFloorRange = 0.1f;
+    [SerializeField] private LayerMask jumpLayerMask;
     [SerializeField] private float acceleration = 0.1f;
 
     [SerializeField] private bool isGrounded;
     private Rigidbody rb;
+    private PhotonView photonView;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        if (!gameObject.GetPhotonView().IsMine)
+
+        photonView = gameObject.GetPhotonView();
+        if (!photonView.IsMine)
         {
             Destroy(rb);
             return;
@@ -99,26 +104,42 @@ public class PlayerMovementRigidbody : MonoBehaviour, IControllable
     private void JumpLogic()
     {
         if (isGrounded)
-            rb.AddForce(Vector3.up * jumpForce);
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        IsGroundedUpate(collision, true);
-    }
-
-    void OnCollisionExit(Collision collision)
-    {
-        IsGroundedUpate(collision, false);
-    }
-
-    private void IsGroundedUpate(Collision collision, bool value)
-    {
-        if (collision.gameObject.layer.ToString() == ("0"))
         {
-            isGrounded = value;
+            rb.AddForce(Vector3.up * jumpForce);
         }
-        Debug.Log(collision.gameObject.layer.ToString());
-        Debug.Log(collision.gameObject.name);
+    }
+
+    private void IsGroundedUpate(bool value)
+    {
+        isGrounded = value;
+    }
+
+    private void Update()
+    {
+        if (photonView.IsMine)
+            ThrowRaycastDown();
+    }
+
+    private void ThrowRaycastDown()
+    {
+        Collider collider = GetComponent<Collider>();
+
+        Vector3 playerCenterBottomPoint = new Vector3(collider.bounds.center.x, collider.bounds.min.y, collider.bounds.center.z);
+
+        Ray ray = new Ray(playerCenterBottomPoint + (transform.up * minimumJumpFloorRange), -transform.up);
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, minimumJumpFloorRange * 2, jumpLayerMask, QueryTriggerInteraction.Ignore))
+        {
+            IsGroundedUpate(true);
+            Debug.Log(true);
+        }
+        else
+        {
+            Debug.Log(false);
+            IsGroundedUpate(false);
+        }
+        Debug.DrawLine(playerCenterBottomPoint + transform.up, playerCenterBottomPoint - (transform.up * 2));
     }
 }
