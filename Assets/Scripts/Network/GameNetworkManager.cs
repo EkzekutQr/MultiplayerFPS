@@ -11,7 +11,7 @@ public class GameNetworkManager : MonoBehaviourPunCallbacks, IPunObservable
 
     void Start()
     {
-        PhotonNetwork.Instantiate(playerPrefab.name, playerPrefab.transform.position, Quaternion.identity);
+        GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, playerPrefab.transform.position, Quaternion.identity);
     }
     
     public void Leave()

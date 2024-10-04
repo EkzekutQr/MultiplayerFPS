@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
+using Photon.Pun;
 
 [RequireComponent(typeof(PlayerRotationFollowCamera))]
 public class CameraLauncher : MonoBehaviour
@@ -18,6 +19,8 @@ public class CameraLauncher : MonoBehaviour
 
     private void Awake()
     {
+        if (!gameObject.GetPhotonView().IsMine) return;
+
         InstantiateCamera();
         InstantiateCinemachine();
         cinemachine.GetComponent<CinemachineCamera>().Follow = cameraFollow.transform;

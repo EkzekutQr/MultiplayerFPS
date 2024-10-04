@@ -24,12 +24,6 @@ public class PlayerController : MonoBehaviour
         usingControllable = GetComponent<IUsingControllable>();
         Debug.Log(cameraControllable == null);
         photonView = GetComponent<PhotonView>();
-        if (!photonView.IsMine)
-        {
-            Camera cam = transform.GetComponentInChildren<Camera>();
-            cam.enabled = false;
-            cam.GetComponent<AudioListener>().enabled = false;
-        }
     }
 
     private void OnEnable()

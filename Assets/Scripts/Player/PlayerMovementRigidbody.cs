@@ -1,8 +1,8 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class PlayerMovementRigidbody : MonoBehaviour, IControllable
 {
     [SerializeField] private float speed = 100f;
@@ -15,6 +15,11 @@ public class PlayerMovementRigidbody : MonoBehaviour, IControllable
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        if (!gameObject.GetPhotonView().IsMine)
+        {
+            Destroy(rb);
+            return;
+        }
     }
 
     public void ApplyVerticalMoving()
