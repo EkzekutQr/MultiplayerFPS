@@ -5,4 +5,8 @@ using UnityEngine;
 public abstract class WeaponBase : ItemBase, IWeapon
 {
     // ƒополнительные свойства и методы дл€ оружи€
+    public bool Shoot()
+    {
+        throw new System.NotImplementedException();
+    }
 }
