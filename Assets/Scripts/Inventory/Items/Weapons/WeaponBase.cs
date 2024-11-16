@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class WeaponBase : ItemBase, IWeapon
 {
-    // ƒополнительные свойства и методы дл€ оружи€
-    public bool Shoot()
-    {
-        throw new System.NotImplementedException();
-    }
+    private ProjectileBase projectile;
+
+    public ProjectileBase Projectile { get => projectile; set => projectile = value; }
+
+    public abstract bool Shoot();
 }

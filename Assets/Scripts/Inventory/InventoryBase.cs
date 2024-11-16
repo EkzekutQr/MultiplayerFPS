@@ -15,7 +15,6 @@ public abstract class InventoryBase
         items = initialItems ?? new List<ItemBase>();
     }
 
-    public abstract bool SetCurrentItem(ItemBase item);
     public abstract bool AddItem(ItemBase item);
     public abstract bool RemoveItem(ItemBase item);
     public abstract bool UseItem(ItemBase item);

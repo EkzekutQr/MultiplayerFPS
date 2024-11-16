@@ -133,11 +133,9 @@ public class PlayerMovementRigidbody : MonoBehaviour, IControllable
         if (Physics.Raycast(ray, out hit, minimumJumpFloorRange * 2, jumpLayerMask, QueryTriggerInteraction.Ignore))
         {
             IsGroundedUpate(true);
-            Debug.Log(true);
         }
         else
         {
-            Debug.Log(false);
             IsGroundedUpate(false);
         }
         Debug.DrawLine(playerCenterBottomPoint + transform.up, playerCenterBottomPoint - (transform.up * 2));

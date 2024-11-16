@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private IControllable controllable;
     private ICameraControllable cameraControllable;
     private IUsingControllable usingControllable;
+    private IShootingControllable shootingControllable;
     private GameInput gameinput;
     private PhotonView photonView;
 
@@ -17,12 +18,13 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        gameinput = new GameInput();
+        gameinput = GameInputSingleton.Instance.GameInput;
         gameinput.Enable();
         controllable = GetComponent<IControllable>();
         cameraControllable = transform.GetComponentInChildren<ICameraControllable>();
-        usingControllable = GetComponent<IUsingControllable>();
-        Debug.Log(cameraControllable == null);
+        usingControllable = GetComponentInChildren<IUsingControllable>();
+        shootingControllable = GetComponentInChildren<IShootingControllable>();
+
         photonView = GetComponent<PhotonView>();
     }
 
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour
         if (!photonView.IsMine) return;
         gameinput.Gameplay.Jump.performed += OnJumpPerformed;
         gameinput.Gameplay.Using.performed += OnUsingPerformed;
+        gameinput.Gameplay.Shoot.performed += OnShootingPerformed;
     }
 
     private void OnDisable()
@@ -38,6 +41,7 @@ public class PlayerController : MonoBehaviour
         if (!photonView.IsMine) return;
         gameinput.Gameplay.Jump.performed -= OnJumpPerformed;
         gameinput.Gameplay.Using.performed -= OnUsingPerformed;
+        gameinput.Gameplay.Shoot.performed -= OnShootingPerformed;
     }
 
     private void OnJumpPerformed(InputAction.CallbackContext obj)
@@ -72,5 +76,9 @@ public class PlayerController : MonoBehaviour
     private void OnUsingPerformed(InputAction.CallbackContext obj)
     {
         usingControllable.Use();
+    }
+    private void OnShootingPerformed(InputAction.CallbackContext obj)
+    {
+        shootingControllable.Shoot();
     }
 }

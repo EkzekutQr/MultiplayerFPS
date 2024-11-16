@@ -1,6 +1,7 @@
 ﻿
 using UnityEngine;
 
-public class ItemBase : MonoBehaviour
+public abstract class ItemBase : MonoBehaviour
 {
+    public abstract void Use();
 }

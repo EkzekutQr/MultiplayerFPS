@@ -17,6 +17,7 @@ public class PlayerRotationFollowCamera : MonoBehaviour, ICameraControllable
 
     public void Rotate(Vector2 direction)
     {
+        if (cam == null) return;
         transform.rotation = Quaternion.Euler(0, cam.rotation.eulerAngles.y, 0);
     }
 }

@@ -21,7 +21,7 @@ public class WeaponInventory : InventoryBase
     public override bool AddItem(ItemBase item)
     {
         if (items.Contains(item)) return false;
-        if (!item.TryGetComponent<IWeapon>(out IWeapon iWeapon)) return false;
+        if (!item.TryGetComponent<IWeapon>(out IWeapon weapon)) return false;
 
         items.Add(item);
 
@@ -37,21 +37,11 @@ public class WeaponInventory : InventoryBase
         return true;
     }
 
-    public override bool SetCurrentItem(ItemBase item)
-    {
-        if (!items.Contains(item)) return false;
-
-        currentItem = item;
-
-        return true;
-    }
-
     public override bool UseItem(ItemBase item)
     {
         if (!items.Contains(item)) return false;
-        if (!item.TryGetComponent<IWeapon>(out IWeapon iWeapon)) return false;
 
-        iWeapon.Shoot();
+        item.Use();
 
         return true;
     }

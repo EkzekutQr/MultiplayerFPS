@@ -116,6 +116,51 @@ Transform:
   - {fileID: 3578332072715809217}
   m_Father: {fileID: 7426396482833137528}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2235720529280961936
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5172158874094272482}
+  - component: {fileID: 6545085327104239689}
+  m_Layer: 0
+  m_Name: ItemHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5172158874094272482
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2235720529280961936}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.37799835, y: 0.819, z: 0.47400093}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3333366101756462702}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6545085327104239689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2235720529280961936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8eadb24da59f8d4d818ead5bd8d38da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handlingItem: {fileID: 0}
 --- !u!1 &3449950883079090569
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,6 +465,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8694263825599811127}
+  - {fileID: 5172158874094272482}
   m_Father: {fileID: 7426396482833137528}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6626191884063055221
@@ -435,6 +481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startItems: []
+  handlingItemOnAwake: {fileID: 0}
 --- !u!1 &6657319573663730688
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,7 +530,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -503,6 +550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fbbe507479e26240932025f4c3e712f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blaster: {fileID: 0}
 --- !u!1 &7098450243656258469
 GameObject:
   m_ObjectHideFlags: 0
