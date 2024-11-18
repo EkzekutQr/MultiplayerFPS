@@ -40,8 +40,11 @@ public class InventoryController : MonoBehaviour, IInventoryController, IUsingCo
     {
         if (itemHandler != null) return;
 
-        itemHandler = transform.GetComponentInChildren<IItemHandler>();
-        itemHandler.HandlingItem = handlingItemOnAwake;
+        itemHandler = transform.root.GetComponent<IPlayerCameraHolder>().
+            Cam.GetComponentInChildren<IItemHandler>();
+
+        if (handlingItemOnAwake != null)
+            itemHandler.SetHandlingItem(handlingItemOnAwake);
     }
 
     private void StartListenTakingColliderController()
@@ -55,6 +58,9 @@ public class InventoryController : MonoBehaviour, IInventoryController, IUsingCo
         {
             if (item.AddItem(itemBase))
             {
+                itemBase.SwitchTurnMesh(false);
+                SetItemToHandlingSpot(itemBase);
+
                 if (itemHandler.HandlingItem == null)
                     SetHandlingItem(itemBase);
                 break;
@@ -62,11 +68,18 @@ public class InventoryController : MonoBehaviour, IInventoryController, IUsingCo
         }
     }
 
+    private void SetItemToHandlingSpot(ItemBase itemBase)
+    {
+        itemBase.transform.parent = itemHandler.Root;
+        itemBase.transform.localPosition = Vector3.zero;
+        itemBase.transform.localEulerAngles = Vector3.zero;
+    }
+
     public void SetHandlingItem(ItemBase item)
     {
         if (item == null)
             return;
-        itemHandler.HandlingItem = item;
+        itemHandler.SetHandlingItem(item);
     }
 
     public void OnUsingPerformed()

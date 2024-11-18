@@ -5,7 +5,7 @@ using UnityEngine;
 using Photon.Pun;
 
 [RequireComponent(typeof(PlayerRotationFollowCamera))]
-public class CameraLauncher : MonoBehaviour
+public class CameraLauncher : MonoBehaviour, IPlayerCameraHolder
 {
     [SerializeField] private GameObject cameraPrefab;
     [SerializeField] private GameObject cinemachinePrefab;
@@ -15,7 +15,8 @@ public class CameraLauncher : MonoBehaviour
     [SerializeField] private GameObject cam;
     [SerializeField] private GameObject cinemachine;
 
-    public GameObject Cam { get => cam; set => cam = value; }
+    public GameObject Cam { get => cam; }
+
 
     private void Awake()
     {
@@ -41,4 +42,8 @@ public class CameraLauncher : MonoBehaviour
         Destroy(cam);
         Destroy(cinemachine);
     }
+}
+public interface IPlayerCameraHolder
+{
+    public GameObject Cam { get; }
 }

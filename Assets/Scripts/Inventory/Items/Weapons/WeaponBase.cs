@@ -4,7 +4,9 @@ using UnityEngine;
 
 public abstract class WeaponBase : ItemBase, IWeapon
 {
-    private ProjectileBase projectile;
+    [SerializeField] protected List<ProjectileBase> projectiles;
+
+    protected ProjectileBase projectile;
 
     public ProjectileBase Projectile { get => projectile; set => projectile = value; }
 

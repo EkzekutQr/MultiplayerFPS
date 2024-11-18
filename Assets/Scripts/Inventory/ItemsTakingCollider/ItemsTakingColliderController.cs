@@ -6,7 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class ItemsTakingColliderController : MonoBehaviour, IItemsTakingColliderController
 {
-    [SerializeField] Blaster blaster;
     private Action<ItemBase> OnItemColliderEnter;
 
     Action<ItemBase> IItemsTakingColliderController.OnItemColliderEnter { get => OnItemColliderEnter; set => OnItemColliderEnter = value; }
