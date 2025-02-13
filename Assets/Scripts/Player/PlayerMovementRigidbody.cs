@@ -9,7 +9,9 @@ public class PlayerMovementRigidbody : MonoBehaviour, IControllable
     [SerializeField] private float jumpForce = 50f;
     [SerializeField] private float minimumJumpFloorRange = 0.1f;
     [SerializeField] private LayerMask jumpLayerMask;
-    [SerializeField] private float acceleration = 0.1f;
+    [SerializeField] private float acceleration = 0.5f;
+
+    [SerializeField] Vector3 velocityy;
 
     [SerializeField] private bool isGrounded;
     private Rigidbody rb;
@@ -96,7 +98,9 @@ public class PlayerMovementRigidbody : MonoBehaviour, IControllable
         //rb.AddForce(moveDirection.normalized * speed, ForceMode.Force);
         rb.AddForce(((transform.forward * moveDirection.z) + (transform.right * moveDirection.x)).normalized * speed, ForceMode.Force);
 
-        rb.velocity = rb.velocity - new Vector3(rb.velocity.x * acceleration, 0, rb.velocity.z * acceleration);
+        rb.AddForce(- new Vector3(rb.velocity.x * acceleration, 0, rb.velocity.z * acceleration), ForceMode.Acceleration);
+        velocityy = rb.velocity;
+        //rb.velocity = rb.velocity - new Vector3(rb.velocity.x * acceleration, 0, rb.velocity.z * acceleration);
 
         //transform.LookAt(transform.position + new Vector3(rb.velocity.x, 0, rb.velocity.z));
     }

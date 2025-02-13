@@ -215,13 +215,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84842e53fda5b354db8ba24297ce903a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 200
   jumpForce: 275
   minimumJumpFloorRange: 0.1
   jumpLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  acceleration: 0.3
+  acceleration: 15
+  velocityy: {x: 0, y: 0, z: 0}
   isGrounded: 1
 --- !u!114 &6458210117146582204
 MonoBehaviour:

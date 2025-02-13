@@ -71,7 +71,7 @@ public class InventoryController : MonoBehaviour, IInventoryController, IUsingCo
     private void SetItemToHandlingSpot(ItemBase itemBase)
     {
         itemBase.transform.parent = itemHandler.Root;
-        itemBase.transform.localPosition = Vector3.zero;
+        itemBase.transform.localPosition = itemBase.ItemHandlerPosition;
         itemBase.transform.localEulerAngles = Vector3.zero;
     }
 
