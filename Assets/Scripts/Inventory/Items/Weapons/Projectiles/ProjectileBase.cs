@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ProjectileBase : MonoBehaviour, IProjectile
+public abstract class ProjectileBase : ItemBase, IProjectile
 {
     private float speed;
     private float damage;
